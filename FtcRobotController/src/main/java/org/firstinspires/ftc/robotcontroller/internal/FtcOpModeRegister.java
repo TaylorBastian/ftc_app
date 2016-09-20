@@ -63,19 +63,7 @@ public class FtcOpModeRegister implements OpModeRegister {
      * @see com.qualcomm.robotcore.eventloop.opmode.Autonomous
      */
     public void register(OpModeManager manager) {
-
-        /**
-         * Register OpModes implemented in the Blocks visual programming language.
-         */
         BlocksOpMode.registerAll(manager);
-
-        /**
-         * Register OpModes that use the annotation-based registration mechanism.
-         */
         AnnotatedOpModeRegistrar.register(manager);
-
-        /**
-         * Any manual OpMode class registrations should go here.
-         */
     }
 }
