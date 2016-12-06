@@ -36,7 +36,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 import com.qualcomm.robotcore.eventloop.opmode.AnnotatedOpModeRegistrar;
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptNullOp;
-import org.firstinspires.ftc.robotcontroller.internal.testcode.TankDriveMk2;
 
 /**
  * {@link FtcOpModeRegister} is responsible for registering opmodes for use in an FTC game.
@@ -64,8 +63,20 @@ public class FtcOpModeRegister implements OpModeRegister {
      * @see com.qualcomm.robotcore.eventloop.opmode.Autonomous
      */
     public void register(OpModeManager manager) {
+
+        /**
+         * Register OpModes implemented in the Blocks visual programming language.
+         */
         BlocksOpMode.registerAll(manager);
+        manager.register("2016-2017Drive",RMHSDrive.class);
+
+        /**
+         * Register OpModes that use the annotation-based registration mechanism.
+         */
         AnnotatedOpModeRegistrar.register(manager);
-        manager.register("TankDriveMk3", TankDriveMk2.class);
+
+        /**
+         * Any manual OpMode class registrations should go here.
+         */
     }
 }
