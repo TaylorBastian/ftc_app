@@ -17,16 +17,18 @@ public class RMHSDrive extends LinearOpMode {
         rightmotor.setDirection(DcMotor.Direction.REVERSE);
         waitForStart();
         while(opModeIsActive()){
-            if(gamepad1.right_stick_x==0) {
-                leftmotor.setPower(-gamepad1.left_stick_y);
-                rightmotor.setPower(-gamepad1.left_stick_y);
-
-                middlemotor.setPower(-gamepad1.left_stick_x);
-            }else{
-                leftmotor.setPower(gamepad1.right_stick_x);
-                rightmotor.setPower(-gamepad1.right_stick_x);
+            if(gamepad1.a){
+                middlemotor.setPower(1);
+            }
+            if(gamepad1.x){
+                middlemotor.setPower(-1);
+            }
+            if (!gamepad1.a&&!gamepad1.x){
                 middlemotor.setPower(0);
             }
+            rightmotor.setPower(gamepad1.right_stick_y);
+            leftmotor.setPower(-gamepad1.left_stick_y);
+
         }
     }
 }
