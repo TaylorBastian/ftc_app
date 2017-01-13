@@ -3,32 +3,54 @@ package org.firstinspires.ftc.robotcontroller.internal;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class RMHSDrive extends LinearOpMode {
     DcMotor leftmotor;
     DcMotor rightmotor;
-    DcMotor middlemotor;
+    DcMotor spinnermotor;
+    DcMotor shootermotor;
+    Servo pusher;
     @Override
     public void runOpMode() throws InterruptedException {
         leftmotor=hardwareMap.dcMotor.get("l");
         rightmotor=hardwareMap.dcMotor.get("r");
-        middlemotor=hardwareMap.dcMotor.get("m");
+        spinnermotor=hardwareMap.dcMotor.get("s");
+        shootermotor=hardwareMap.dcMotor.get("ss");
+        pusher=hardwareMap.servo.get("p");
 
         rightmotor.setDirection(DcMotor.Direction.REVERSE);
+        pusher.setPosition(0.5);
         waitForStart();
         while(opModeIsActive()){
-            if(gamepad1.a){
-                middlemotor.setPower(1);
+
+
+            //Suck
+            if(gamepad1.right_bumper){
+                spinnermotor.setPower(0.50f);
             }
-            if(gamepad1.x){
-                middlemotor.setPower(-1);
+
+            //Push out
+            if(gamepad1.left_bumper){
+                spinnermotor.setPower(-0.50f);
             }
-            if (!gamepad1.a&&!gamepad1.x){
-                middlemotor.setPower(0);
+
+            //Shut off if no buttons pressed
+            if (!gamepad1.left_bumper&&!gamepad1.right_bumper){
+                spinnermotor.setPower(0);
             }
+
+
+            //Shooter Wheel Control
+            if(gamepad2.a){
+                shootermotor.setPower(1.0);
+            }
+            if(gamepad1.dpad_right){
+                pusher.setPosition(1);
+            }
+            //set wheel motors
             rightmotor.setPower(gamepad1.right_stick_y);
             leftmotor.setPower(-gamepad1.left_stick_y);
-
         }
     }
 }
