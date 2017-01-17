@@ -42,7 +42,7 @@ public class RMHSDrive extends LinearOpMode {
 
 
             //Shooter Wheel Control
-            if(gamepad2.a){
+            if(gamepad1.a){
                 shootermotor.setPower(-1.0);
             }
             if(gamepad1.dpad_right) {
@@ -52,7 +52,7 @@ public class RMHSDrive extends LinearOpMode {
                 pusher.setPosition(0.5);
             }
 
-            
+
             //set wheel motors
             rightmotor.setPower(gamepad1.right_stick_y);
             leftmotor.setPower(-gamepad1.left_stick_y);
