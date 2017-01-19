@@ -59,12 +59,12 @@ public class RMHSDrive extends LinearOpMode {
 
             //Push ball
             if(gamepad1.dpad_right) {
-                pusher.setPosition(0);
+                pusher.setPosition(0.1);
             }
 
             //Reset servo position
             if(gamepad1.dpad_left) {
-                pusher.setPosition(0.75);
+                pusher.setPosition(0.65);
             }
 
 
