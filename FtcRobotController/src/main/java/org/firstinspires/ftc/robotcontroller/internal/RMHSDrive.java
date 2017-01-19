@@ -22,7 +22,7 @@ public class RMHSDrive extends LinearOpMode {
         spinnermotor=hardwareMap.dcMotor.get("s");
         shootermotor=hardwareMap.dcMotor.get("ss");
         pusher=hardwareMap.servo.get("p");
-        
+
         //set servo start position
         pusher.setPosition(0.5);
 
@@ -64,7 +64,7 @@ public class RMHSDrive extends LinearOpMode {
 
             //Reset servo position
             if(gamepad1.dpad_left) {
-                pusher.setPosition(0.5);
+                pusher.setPosition(0.75);
             }
 
 
