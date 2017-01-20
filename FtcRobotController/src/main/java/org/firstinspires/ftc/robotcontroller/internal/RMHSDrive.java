@@ -22,9 +22,10 @@ public class RMHSDrive extends LinearOpMode {
         spinnermotor=hardwareMap.dcMotor.get("s");
         shootermotor=hardwareMap.dcMotor.get("ss");
         pusher=hardwareMap.servo.get("p");
+        double shooterpower=0;
 
         //set servo start position
-        pusher.setPosition(0.5);
+        pusher.setPosition(0.65);
 
         //Wait for play button to start
         waitForStart();
@@ -51,15 +52,21 @@ public class RMHSDrive extends LinearOpMode {
 
             //Shooter Wheel Control
             if(gamepad1.a){
-                shootermotor.setPower(-1.0);
+               if(shooterpower>-1){
+                   shooterpower=shooterpower+0.05;
+               }
             }
             else{
-                shootermotor.setPower(0);
+                if(shooterpower<0){
+                    shooterpower=shooterpower-0.05;
+                }
             }
+            shootermotor.setPower(shooterpower);
+
 
             //Push ball
             if(gamepad1.dpad_right) {
-                pusher.setPosition(0.1);
+                pusher.setPosition(0.4);
             }
 
             //Reset servo position
