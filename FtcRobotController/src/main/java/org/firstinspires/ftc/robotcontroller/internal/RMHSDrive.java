@@ -11,6 +11,7 @@ public class RMHSDrive extends LinearOpMode {
     DcMotor spinnermotor;
     DcMotor shootermotor;
     Servo pusher;
+    Double shooterpower;
 
 
     @Override
@@ -22,7 +23,8 @@ public class RMHSDrive extends LinearOpMode {
         spinnermotor=hardwareMap.dcMotor.get("s");
         shootermotor=hardwareMap.dcMotor.get("ss");
         pusher=hardwareMap.servo.get("p");
-        double shooterpower=0;
+        shooterpower=0.0;
+        shootermotor.setDirection(DcMotor.Direction.REVERSE);
 
         //set servo start position
         pusher.setPosition(0.65);
@@ -52,16 +54,18 @@ public class RMHSDrive extends LinearOpMode {
 
             //Shooter Wheel Control
             if(gamepad1.a){
-               if(shooterpower>-1){
-                   shooterpower=shooterpower+0.05;
+               if(shooterpower<0.99){
+                   shooterpower=shooterpower+0.01;
                }
             }
             else{
-                if(shooterpower<0){
-                    shooterpower=shooterpower-0.05;
+                if(shooterpower>0.01){
+                    shooterpower=shooterpower-0.01;
                 }
             }
-            shootermotor.setPower(shooterpower);
+            if(shooterpower<=0.99 && shooterpower>=0.01) {
+                shootermotor.setPower(shooterpower);
+            }
 
 
             //Push ball
@@ -74,7 +78,8 @@ public class RMHSDrive extends LinearOpMode {
                 pusher.setPosition(0.65);
             }
 
-
+            telemetry.addData("Shooter Power",shooterpower);
+            telemetry.update();
             //set wheel motors
             rightmotor.setPower(gamepad1.right_stick_y);
             leftmotor.setPower(-gamepad1.left_stick_y);
