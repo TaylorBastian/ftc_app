@@ -13,7 +13,6 @@ public class RMHSDrive extends LinearOpMode {
     Servo pusher;
     Double shooterpower;
 
-
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -37,12 +36,12 @@ public class RMHSDrive extends LinearOpMode {
 
 
             //Suck
-            if(gamepad1.right_bumper){
+            if(gamepad1.left_bumper){
                 spinnermotor.setPower(0.50f);
             }
 
             //Push out
-            if(gamepad1.left_bumper){
+            if(gamepad1.right_bumper){
                 spinnermotor.setPower(-0.50f);
             }
 
@@ -53,7 +52,7 @@ public class RMHSDrive extends LinearOpMode {
 
 
             //Shooter Wheel Control
-            if(gamepad1.a){
+            if(gamepad2.right_bumper){
                if(shooterpower<0.99){
                    shooterpower=shooterpower+0.01;
                }
@@ -69,16 +68,17 @@ public class RMHSDrive extends LinearOpMode {
 
 
             //Push ball
-            if(gamepad1.dpad_right) {
+            if(gamepad2.a) {
                 pusher.setPosition(0.4);
             }
 
             //Reset servo position
-            if(gamepad1.dpad_left) {
+            if(gamepad2.x) {
                 pusher.setPosition(0.65);
             }
 
             telemetry.addData("Shooter Power",shooterpower);
+            telemetry.addData("Servo Possition", pusher.getPosition());
             telemetry.update();
             //set wheel motors
             rightmotor.setPower(gamepad1.right_stick_y);
